@@ -1,0 +1,9 @@
+venv/
+.idea/
+__pycache__/
+*.pyc
+tests/__pypackages__/bin/
+tests/__pypackages__/lib/
+tests/__pypackages__/lib64/
+dist/
+*.egg-info/
