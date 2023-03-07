@@ -18,6 +18,12 @@ This saves the need for distributing python version specific packages explicitly
 
 pip must already exist in the python environment if requirements.txt is used.
 
+## Installation
+
+Install pypackages directly into your project as follows:
+
+    pip install --target . --upgrade pypackages
+
 ## Structure of __pypackages__
 
     myapp.py
