@@ -1,46 +1,60 @@
 # pypackages
 
 Script specific packages similar to PEP 582 using a `__pypackages__` directory.
-The `__pypackages__` directory must be in the same directory as the script being executed.
+The `__pypackages__` directory is created in the same directory as the script being executed.
+A requirements.txt file must exist in the same folder to activate package installation.
 
 ## Intent
 
-Simplify the distribution of python scripts with dependencies.
-No need to use virtual environments or explicitly install dependencies using pip.
+Avoid dependency conflicts when installing python command line utilities.
 
-## (Optional) Automatic requirements install
+## Automatic requirements install
 
-Place requirements.txt in the `__pypackages__` folder to install or upgrade on startup using pip.
+Place requirements.txt in the folder to install or upgrade on startup using pip.
 
 This saves the need for distributing python version specific packages explicitly.
 
-## Requirements
+This also avoids the package having explicit dependencies that are installed along side
+the package therefore creating the potential for package version conflicts.
+
+## Activating
+
+    import pypackages
+    pypackages.packages()
+
+Execute pypackages.packages() to perform a local installation of requirements.txt
+
+## Pre-requisites
 
 pip must already exist in the python environment if requirements.txt is used.
 
-## Installation
+## Example setup.cfg
 
-Install pypackages directly into your project as follows:
+    [metadata]
+    name = demo
+    version = 1.0
 
-    pip install --target . --upgrade pypackages
+    [options]
+    packages =
+        demo
+    install_requires =
+        pypackages
 
-## Structure of __pypackages__
+    [options.package_data]
+    demo =
+        *.txt
 
-    myapp.py
-    __pypackages__/
-        requirements.txt  (optional)
-        bin/
-        lib/
-            python3.11/
-                site-packages/
+    [options.entry_points]
+    console_scripts =
+        demo = demo.app:cli
 
-## Structure of deployment
+
+## Structure of deployment for scripts
 
     myapp.py
     pypackages/
         __init__.py
-    __pypackages__/
-        requirements.txt
+    requirements.txt
 
 ## Example (requirements.txt)
 
@@ -50,6 +64,8 @@ Install pypackages directly into your project as follows:
 
     #!/usr/bin/python
     import pypackages
+    pypackages.packages()
+
     from sanic import Sanic
     from sanic.response import text
 
@@ -67,4 +83,3 @@ Install pypackages directly into your project as follows:
 ## References
 
 https://peps.python.org/pep-0582/
-
