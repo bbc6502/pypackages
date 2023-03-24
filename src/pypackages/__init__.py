@@ -25,7 +25,7 @@ def packages():
                         os.remove(os.path.join(root, file_name))
                     for dir_name in dirs:
                         os.rmdir(os.path.join(root, dir_name))
-                    os.rmdir(_packages_dir)
+                os.rmdir(_packages_dir)
             if not os.path.exists(_packages_dir):
                 os.mkdir(_packages_dir)
                 _old_exit = sys.exit
